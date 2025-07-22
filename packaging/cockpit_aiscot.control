@@ -1,4 +1,4 @@
-Package: cockpit-aiscot
+Package: cockpit_aiscot
 Version: 1.0.0
 Section: admin
 Priority: optional

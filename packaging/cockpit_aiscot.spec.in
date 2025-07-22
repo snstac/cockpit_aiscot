@@ -1,11 +1,11 @@
-Name: cockpit-starter-kit
+Name: cockpit_aiscot
 Version: %{VERSION}
 Release: 1%{?dist}
-Summary: Cockpit Starter Kit Example Module
-License: LGPL-2.1-or-later
+Summary: Cockpit AISCOT Module
+License: Apache-2.0
 
-Source0: https://github.com/cockpit-project/starter-kit/releases/download/%{version}/%{name}-%{version}.tar.xz
-Source1: https://github.com/cockpit-project/starter-kit/releases/download/%{version}/%{name}-node-%{version}.tar.xz
+Source0: https://github.com/snstac/cockpit-aiscot/releases/download/%{version}/%{name}-%{version}.tar.xz
+Source1: https://github.com/snstac/cockpit-aiscot/releases/download/%{version}/%{name}-node-%{version}.tar.xz
 BuildArch: noarch
 %if ! 0%{?suse_version}
 ExclusiveArch: %{nodejs_arches} noarch
@@ -30,7 +30,7 @@ Requires: cockpit-bridge
 %{NPM_PROVIDES}
 
 %description
-Cockpit Starter Kit Example Module
+Cockpit AISCOT Module
 
 %prep
 %autosetup -n %{name} -a 1
