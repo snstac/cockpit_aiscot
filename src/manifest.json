@@ -1,11 +1,12 @@
 {
-    "requires": {
-        "cockpit": "137"
-    },
-
-    "tools": {
-        "index": {
-            "label": "Starter Kit"
-        }
+  "version": 0,
+  "require": {
+    "cockpit": "215"
+  },
+  "tools": {
+    "index": {
+      "label": "Marine (AISCOT)",
+      "path": "/cockpit_aiscot"
     }
+  }
 }

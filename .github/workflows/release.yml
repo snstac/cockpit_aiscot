@@ -1,0 +1,84 @@
+# Create a GitHub upstream release. Replace "TARNAME" with your project tarball
+# name and enable this by dropping the ".disabled" suffix from the file name.
+# See README.md.
+name: release
+on:
+  push:
+    tags:
+      - 'v*' # Match semantic versioning tags like v1.2.3
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # create GitHub release
+      contents: write
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Install Debian Package Building Dependencies
+        run: sudo bash packaging/install_pkg_build_deps.sh
+
+      - name: Pacify git's permission check per https://github.blog/2022-04-12-git-security-vulnerability-announced/
+        run: git config --global --add safe.directory '*'
+
+      - name: Workaround for https://github.com/actions/checkout/pull/697
+        run: git fetch --force origin $(git describe --tags):refs/tags/$(git describe --tags)
+
+      - name: Build release
+        run: make dist 
+        
+      - name: Make Debian Package
+        run: make deb
+
+      - name: List current directory and subdirectories
+        run: ls -alR
+      
+      - name: Upload Artifacts to GitHub
+        uses: actions/upload-artifact@master
+        with:
+          name: artifact-packages
+          path: |
+            *.deb
+            *.tar.xz
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset to GitHub
+        id: upload-release-asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: *.deb
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+
+      - name: Upload Release Asset to GitHub
+        id: upload-release-asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: *.tar.xz
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+
+      # - name: Publish GitHub release
+      #   uses: cockpit-project/action-release@7d2e2657382e8d34f88a24b5987f2b81ea165785
+      #   with:
+      #     filename: "TARNAME-${{ github.ref_name }}.tar.xz"
