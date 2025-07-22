@@ -58,8 +58,8 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset to GitHub
-        id: upload-release-asset
+      - name: Upload Release Asset1 to GitHub
+        id: upload-release-asset1
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -68,8 +68,8 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - name: Upload Release Asset to GitHub
-        id: upload-release-asset
+      - name: Upload Release Asset2 to GitHub
+        id: upload-release-asset2
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
