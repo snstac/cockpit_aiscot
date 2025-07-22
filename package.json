@@ -1,9 +1,9 @@
 {
-  "name": "cockpit_aiscot",
+  "name": "aiscot",
   "description": "Cockpit Module for AISCOT Marine TAK gateway.",
   "type": "module",
   "main": "index.js",
-  "repository": "git@github.com:snstac/cockpit_aiscot.git",
+  "repository": "git@github.com:snstac/aiscot.git",
   "author": "",
   "license": "LGPL-2.1",
   "engines": {

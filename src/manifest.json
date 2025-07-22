@@ -6,7 +6,7 @@
   "tools": {
     "index": {
       "label": "Marine (AISCOT)",
-      "path": "/cockpit_aiscot"
+      "path": "/aiscot"
     }
   }
 }

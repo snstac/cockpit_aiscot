@@ -2,7 +2,7 @@
 # To use this, enable Packit-as-a-service in GitHub: https://packit.dev/docs/packit-as-a-service/
 # See https://packit.dev/docs/configuration/ for the format of this file
 
-specfile_path: cockpit_aiscot.spec
+specfile_path: aiscot.spec
 # use the nicely formatted release description from our upstream release, instead of git shortlog
 copy_upstream_release_description: true
 
@@ -12,7 +12,7 @@ srpm_build_deps:
 
 actions:
   post-upstream-clone:
-    - make cockpit_aiscot.spec
+    - make aiscot.spec
     # replace Source1 manually, as create-archive: can't handle multiple tarballs
     - make node-cache
     - sh -c 'sed -i "/^Source1:/ s/https:.*/$(ls *-node*.tar.xz)/" cockpit-*.spec'
